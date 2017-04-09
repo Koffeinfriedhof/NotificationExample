@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+52c3e8a44a7d2daa25023fbaadc05cd7 CMakeFiles/org.koffeinfriedhof.NotificationExample-plasmoids-metadata-json
+5979664b4b61c0a0c5b05490bcfbd2db CMakeFiles/uninstall
+5bf058e15a703960976cc0d473731a03 org.koffeinfriedhof.NotificationExample-plasmoids-metadata.json

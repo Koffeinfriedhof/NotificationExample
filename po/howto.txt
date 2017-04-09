@@ -1,0 +1,25 @@
+How to translate:
+
+Example:
+translate into german:
+
+call:
+./Messages.sh de
+
+Running Messages.sh without an argument will create a template file called .NotificationExample.pot.
+
+Edit the plasma_applet_.NotificationExample-de.po file and set corresponding msgstr.
+
+After editing run ./Messages.sh without an argument. It will create a corresponding .mo-file
+
+To install files you have either to install it using cmake; make; sudo make install
+OR just copy your .mo-file to
+/usr/local/share/locale/de/LC_MESSAGES/plasma_applet_.NotificationExample.mo
+
+Other languages:
+You just have to replace all "de"'s in this document to view an example in your language.
+
+Sharing:
+If you want me to provide your translation, just send a mail to <koffeinfriedhof@gmail.com> with subject "NotificationExample : translation your_language""
+
+*** Do not forget to set your credits to be honored! ***

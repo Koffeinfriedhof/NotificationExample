@@ -1,0 +1,14 @@
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/install/strip.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/install/local.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/install.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/list_install_components.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/org.koffeinfriedhof.NotificationExample-plasmoids-metadata-json.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/rebuild_cache.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/uninstall.dir
+/home/schiggn/Entwicklung/NotificationExample/build/CMakeFiles/edit_cache.dir
+/home/schiggn/Entwicklung/NotificationExample/build/po/CMakeFiles/install/strip.dir
+/home/schiggn/Entwicklung/NotificationExample/build/po/CMakeFiles/install/local.dir
+/home/schiggn/Entwicklung/NotificationExample/build/po/CMakeFiles/edit_cache.dir
+/home/schiggn/Entwicklung/NotificationExample/build/po/CMakeFiles/rebuild_cache.dir
+/home/schiggn/Entwicklung/NotificationExample/build/po/CMakeFiles/list_install_components.dir
+/home/schiggn/Entwicklung/NotificationExample/build/po/CMakeFiles/install.dir

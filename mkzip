@@ -1,0 +1,6 @@
+#!/bin/bash
+VERSION=$(grep "X-KDE-PluginInfo-Version" package/metadata.desktop | sed 's/.*=//')
+NAME=$(grep "X-KDE-PluginInfo-Name" package/metadata.desktop | sed 's/.*=//')
+
+zip -r $NAME-$VERSION.zip package/*
+

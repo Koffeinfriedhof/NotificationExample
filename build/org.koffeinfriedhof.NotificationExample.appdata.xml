@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <id>.NotificationExample</id>
+    <name>NotificationExample</name>
+    <summary>How to send Notifications with plasma</summary>
+    <url type="homepage">http://koffeinfriedhof.de</url>
+    <developer_name>koffeinfriedhof &lt;koffeinfriedhof@gmail.com&gt;</developer_name>
+    <icon type="stock">preferences-system-time</icon>
+    <project_license>GPL</project_license>
+    <metadata_license>CC0-1.0</metadata_license>
+</component>

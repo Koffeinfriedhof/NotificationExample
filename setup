@@ -1,0 +1,79 @@
+ #
+ # Copyright 2017 koffeinfriedhof <koffeinfriedhof@gmail.com>
+ #
+ # This program is free software; you can redistribute it and/or
+ # modify it under the terms of the GNU General Public License as
+ # published by the Free Software Foundation; either version 2 of
+ # the License, or (at your option) any later version.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+#!/bin/bash
+PLASMOIDNAME=org.koffeinfriedhof.NotificationExample
+if [ $# -eq 0 ]; then
+    ./"${0##*/}" --help
+fi
+
+function lFiles {
+    lText="Copying"
+    if [ "$1" == "r" ]; then lText="Removing"; fi
+
+    for file in po/*.mo
+        do
+        LG=${file:(-5)}
+        LG=${LG:0:2}
+        echo "$lText language file for $LG"
+        if ! [ "$1" == "r" ]; then
+            mkdir -p ~/.local/usr/share/locale/$LG/LC_MESSAGES/
+            cp $file ~/.local/usr/share/locale/$LG/LC_MESSAGES/plasma_applet_$PLASMOIDNAME.mo
+        else
+            rm ~/.local/usr/share/locale/$LG/LC_MESSAGES/plasma_applet_$PLASMOIDNAME.mo
+        fi
+    done
+}
+
+for i in "$@"
+do
+case $i in
+    -i|--install)
+        plasmapkg2 -i package
+        lFiles
+    ;;
+    -u|--update)
+        if [ -d .git ]; then git pull; fi
+    	plasmapkg2 -u package
+    	lFiles
+    ;;
+    -r|--remove)
+        plasmapkg2 -r package
+        lFiles "r"
+    ;;
+    -g|--global-install)
+	cd package
+        cmake CMakeLists.txt && make
+        supkg=$(which sudo 2>/dev/null)
+        if [ $(id -u) -eq 0 ] || [ $supkg ]; then
+            $supkg make install
+        else
+            echo "Sorry, I could not find sudo package. You have to manually install: start 'make install' with apropriate rights."
+        fi
+    ;;
+    *)
+        echo "Usage:"
+        echo "-i|--install         :   (local) installation"
+        echo "-u|--update          :   update (local) installation"
+        echo "-r|--remove          :   remove (local) installation"
+        echo "-r -i                :   remove and install (reinstall)"
+        echo ""
+        echo "-g|--global-install  :   run cmake,make and make install"
+        echo ""
+    ;;
+esac
+done;
