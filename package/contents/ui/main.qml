@@ -39,6 +39,8 @@ Item {
     /** PROPERTIES **/
     property string currentNotificationTitle: "Title"
     property string currentNotificationText: "Text"
+    property int currentNotificationTimeout: 0
+    property int currentNotificationExpireTimeout: 0
 
     /** FUNCTIONS **/
     PlasmaCore.DataSource {
@@ -46,16 +48,24 @@ Item {
         engine: "notifications"
         connectedSources: ["org.freedesktop.Notifications"]
     }
+    function listProperty(item)
+    {
+        for (var con in item)
+            console.log(con + ": " + item[con]);
+    }
     function createNotification() {
-        //console.log("SOURCES:"+thisIsTheNotificationDataSource.sources)
+
         var service = thisIsTheNotificationDataSource.serviceForSource("notification");
         var operation = service.operationDescription("createNotification");
-
+        console.log("SOURCES:"+thisIsTheNotificationDataSource.sources)
         operation.appName = "Notification Example";
         operation["appIcon"] = plasmoid.file("images", "icon.svg");
         operation.summary =  currentNotificationTitle;
         operation["body"] = currentNotificationText;
-        operation["timeout"] = 0;
+        operation["timeout"] = currentNotificationTimeout;
+        operation["expireTimeout:"] = currentNotificationExpireTimeout;
+
+        listProperty(operation)
 
         service.startOperationCall(operation);
     }
@@ -63,8 +73,8 @@ Item {
     Plasmoid.backgroundHints: showBackground ? "DefaultBackground" : "NoBackground"
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
-    Plasmoid.toolTipMainText: "Mousehover Icon Text"
-    Plasmoid.toolTipSubText: "Mousehover Subtext"
+    Plasmoid.toolTipMainText: "Notification Example"
+    Plasmoid.toolTipSubText: "This is just a little helper-plasmoid :)"
 
     /** COMPACT **/
     Plasmoid.compactRepresentation: Component {
@@ -79,7 +89,7 @@ Item {
                 width: 100
 
                 svg: PlasmaCore.Svg {
-                    imagePath: plasmoid.file("images", "icon.svg");
+                    imagePath: plasmoid.file("images", "k.svg");
                 }
 
             }
@@ -89,24 +99,44 @@ Item {
     /** FULL **/
     Plasmoid.fullRepresentation: Rectangle {
         id: iAmJustHereForCustomBackgroundColor
-        height: 300
-        width: 600
+        QtLayouts.Layout.minimumWidth: grid.width + units.smallSpacing
+        QtLayouts.Layout.minimumHeight: grid.height + units.smallSpacing
+        QtLayouts.Layout.preferredHeight: QtLayouts.Layout.minimumHeight
+        QtLayouts.Layout.preferredWidth: QtLayouts.Layout.minimumWidth
+
         color: backgroundColor
-        Column {
-            anchors.fill:parent
-            PlasmaComponents.TextField {
-                text: "Title"
-                onTextChanged: currentNotificationTitle=text
-            }
-            PlasmaComponents.TextField {
-                text: "Text"
-                onTextChanged: currentNotificationText=text
-            }
-            PlasmaComponents.Button {
-                iconSource: "draw-arrow-up.png"
-                text: "Emit"
-                onClicked: createNotification()
-            }
+        QtLayouts.GridLayout {
+            id: grid
+            columns: 2
+            rows: 5
+                PlasmaComponents.Label { color: primaryFontColor; text: i18n("Message Title")}
+                PlasmaComponents.TextField {
+                    text: "Title"
+                    onTextChanged: currentNotificationTitle=text
+                }
+                PlasmaComponents.Label { color: primaryFontColor; text: i18n("Message Body")}
+                PlasmaComponents.TextField {
+                    text: "Text"
+                    onTextChanged: currentNotificationText=text
+                }
+                PlasmaComponents.Label { color: primaryFontColor; text: i18n("Timeout")}
+                PlasmaComponents.TextField {
+                    text: "0"
+                    onTextChanged: currentNotificationTimeout=parseInt(text)
+                }
+                PlasmaComponents.Label { color: primaryFontColor; text: i18n("expireTimeout")}
+                PlasmaComponents.TextField {
+                    text: "0"
+                    onTextChanged: currentNotificationExpireTimeout=parseInt(text)
+                }
+                PlasmaComponents.Button {
+                    QtLayouts.Layout.rowSpan: 2
+                    QtLayouts.Layout.fillWidth: true
+                    QtLayouts.Layout.alignment: Qt.AlignVCenter
+                    iconSource: "draw-arrow-up.png"
+                    text: i18n("Emit")
+                    onClicked: createNotification()
+                }
         }
-        }
+    }
 }
