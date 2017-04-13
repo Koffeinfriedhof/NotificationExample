@@ -9,5 +9,14 @@
         <entry name="showIconBackground" type="Bool">
             <default>false</default>
         </entry>
+        <entry name="primaryFontColor" type="String">
+            <default>#3c83d0</default>
+        </entry>
+        <entry name="secondaryFontColor" type="String">
+            <default>#e6e7e8</default>
+        </entry>
+        <entry name="backgroundColor" type="String">
+            <default>black</default>
+        </entry>
     </group>
 </kcfg>
